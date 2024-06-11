@@ -164,7 +164,7 @@ System.register("index", ["data", "modal", "basket"], function (exports_5, conte
             categoriesContainer = document.querySelector("#categories");
             productsContainer = document.querySelector("#Products");
             exports_5("basketProduct", basketProduct = null);
-            // Categories
+            // Categories uchun
             renderCategories = function () {
                 if (!categoriesContainer) {
                     console.error("categoriesContainer topilmadi");
@@ -180,7 +180,7 @@ System.register("index", ["data", "modal", "basket"], function (exports_5, conte
                     col.addEventListener("click", function () { return Swap(item.categoriesId); });
                 });
             };
-            // Products
+            // Products uchun
             renderProducts = function (categoryId) {
                 if (!productsContainer) {
                     console.error("productsContainer topilmadi");
@@ -206,23 +206,30 @@ System.register("index", ["data", "modal", "basket"], function (exports_5, conte
                             return;
                         }
                         modal_1.modalBody.className = "p-3";
-                        modal_1.modalBody.innerHTML = "\n        <div>\n          <div class=\"d-flex justify-content-center\">\n            <img class=\"rounded w-100\" src=\"".concat(p.image, "\">\n          </div>\n          <div class=\"d-flex justify-content-start mt-3\">\n            <div class=\"ps-4\">\n              <h5>").concat(p.name, "</h5>\n              <p>").concat(p.desc, "</p>\n              <p class=\"fw-bold\">").concat(p.price, " ming so'm</p>\n            </div>\n          </div>\n        </div>\n      ");
+                        modal_1.modalBody.innerHTML = "\n        <div>\n          <div class=\"d-flex justify-content-center\">\n            <img class=\"rounded w-100\" src=\"".concat(p.image, "\">\n          </div>\n          <div class=\"d-flex justify-content-start mt-3\">\n            <div class=\"ps-4\">\n              <h5> <span>Name : </span>").concat(p.name, "</h5>\n              <p> <span class=\"fw-bold\">Desc : </span>").concat(p.desc, "</p>\n              <p class=\"fw-bold\">  <span>Price : </span>").concat(p.price, " ming so'm</p>\n            </div>\n          </div>\n        </div>\n      ");
                     });
                     col.appendChild(btn);
                     productsContainer.appendChild(col);
                 });
             };
-            // Basket
+            // Basket uchun
             renderBasket = function () {
+                var iconRed = document.querySelector(".iconRed");
+                iconRed === null || iconRed === void 0 ? void 0 : iconRed.classList.remove("d-none");
                 if (!basket_1.basketBody) {
                     console.error("basketBody topilmadi");
                     return;
                 }
                 basket_1.basketBody.innerHTML = "";
+                var count = 0;
                 basket_1.basket.map(function (item) {
+                    count++;
                     // @ts-ignore
-                    basket_1.basketBody.innerHTML += "\n      <div class=\"col-3\">\n        <div> \n          <img class=\"ModalImg rounded object-fit-cover\" src=\"".concat(item.image, "\" alt=\"\">\n        </div>\n        <div class=\"mt-2\">\n          <h4>").concat(item.name, "</h4>\n          <p>").concat(item.desc, "</p>\n          <div>").concat(item.price, " ming so'm</div>\n        </div>\n      </div> \n    ");
+                    basket_1.basketBody.innerHTML += "\n      <div class=\"col-3 \">\n        <div class=\"card\">\n        <div class=\"text-center\"> \n          <img class=\"ModalImg rounded  object-fit-cover\" src=\"".concat(item.image, "\" alt=\"\">\n        </div>\n        <div class=\"mt-2\">\n          <p class=\"fw-bold\">Name :<span class=\" ms-2 fs-5\">").concat(item.name, "</span></p>\n          <p class=\"fw-bold\">Description :<span class=\" ms-2 fs-5\">").concat(item.desc, "</span></p>\n          <p class=\"fw-bold\">Price :<span class=\" ms-2 fs-5\">").concat(item.price, "</span> ming so'm</p>\n        </div>\n        </div>\n      </div> \n    ");
                 });
+                if (iconRed) {
+                    iconRed.innerHTML = "".concat(count);
+                }
             };
             window.onload = function () {
                 renderCategories();
@@ -236,7 +243,6 @@ System.register("index", ["data", "modal", "basket"], function (exports_5, conte
                 if (basketProduct) {
                     basket_1.basket.push(basketProduct);
                     renderBasket();
-                    alert("Maxsulot qabul qilindi");
                 }
             });
             basket_1.HeaderBasket === null || basket_1.HeaderBasket === void 0 ? void 0 : basket_1.HeaderBasket.addEventListener("click", function () {
@@ -245,7 +251,6 @@ System.register("index", ["data", "modal", "basket"], function (exports_5, conte
                     return;
                 }
                 basket_1.basketModal.show();
-                renderBasket();
             });
             basket_1.basketClose === null || basket_1.basketClose === void 0 ? void 0 : basket_1.basketClose.addEventListener("click", function () {
                 basket_1.basketModal.hide();

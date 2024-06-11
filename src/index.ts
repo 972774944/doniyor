@@ -79,9 +79,9 @@ const renderProducts = (categoryId?: number) => {
           </div>
           <div class="d-flex justify-content-start mt-3">
             <div class="ps-4">
-              <h5>${p.name}</h5>
-              <p>${p.desc}</p>
-              <p class="fw-bold">${p.price} ming so'm</p>
+              <h5> <span>Name : </span>${p.name}</h5>
+              <p> <span class="fw-bold">Desc : </span>${p.desc}</p>
+              <p class="fw-bold">  <span>Price : </span>${p.price} ming so'm</p>
             </div>
           </div>
         </div>
@@ -93,26 +93,35 @@ const renderProducts = (categoryId?: number) => {
 };
 // Basket uchun
 const renderBasket = () => {
+  const iconRed = document.querySelector(".iconRed");
+  iconRed?.classList.remove("d-none");
   if (!basketBody) {
     console.error("basketBody topilmadi");
     return;
   }
   basketBody.innerHTML = "";
+  let count = 0;
   basket.map((item) => {
+    count++;
     // @ts-ignore
     basketBody.innerHTML += `
-      <div class="col-3">
-        <div> 
-          <img class="ModalImg rounded object-fit-cover" src="${item.image}" alt="">
+      <div class="col-3 ">
+        <div class="card">
+        <div class="text-center"> 
+          <img class="ModalImg rounded  object-fit-cover" src="${item.image}" alt="">
         </div>
         <div class="mt-2">
-          <h4>${item.name}</h4>
-          <p>${item.desc}</p>
-          <div>${item.price} ming so'm</div>
+          <p class="fw-bold">Name :<span class=" ms-2 fs-5">${item.name}</span></p>
+          <p class="fw-bold">Description :<span class=" ms-2 fs-5">${item.desc}</span></p>
+          <p class="fw-bold">Price :<span class=" ms-2 fs-5">${item.price}</span> ming so'm</p>
+        </div>
         </div>
       </div> 
     `;
   });
+  if (iconRed) {
+    iconRed.innerHTML = `${count}`;
+  }
 };
 
 window.onload = () => {
@@ -129,7 +138,6 @@ Buying?.addEventListener("click", () => {
   if (basketProduct) {
     basket.push(basketProduct);
     renderBasket();
-    alert("Maxsulot qabul qilindi");
   }
 });
 
@@ -139,7 +147,6 @@ HeaderBasket?.addEventListener("click", () => {
     return;
   }
   basketModal.show();
-  renderBasket();
 });
 
 basketClose?.addEventListener("click", () => {
