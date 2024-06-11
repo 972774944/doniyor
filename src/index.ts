@@ -14,7 +14,7 @@ const productsContainer = document.querySelector("#Products");
 
 export let basketProduct: Product | null = null;
 
-// Categories
+// Categories uchun
 const renderCategories = () => {
   if (!categoriesContainer) {
     console.error("categoriesContainer topilmadi");
@@ -34,7 +34,7 @@ const renderCategories = () => {
   });
 };
 
-// Products
+// Products uchun
 const renderProducts = (categoryId?: number) => {
   if (!productsContainer) {
     console.error("productsContainer topilmadi");
@@ -91,7 +91,7 @@ const renderProducts = (categoryId?: number) => {
     productsContainer.appendChild(col);
   });
 };
-// Basket
+// Basket uchun
 const renderBasket = () => {
   if (!basketBody) {
     console.error("basketBody topilmadi");
